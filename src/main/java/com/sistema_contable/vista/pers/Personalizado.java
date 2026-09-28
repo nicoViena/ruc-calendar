@@ -11,13 +11,14 @@ import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
 import javax.swing.JOptionPane;
 import com.sistema_contable.model.Cliente;
+import com.sistema_contable.model.PLE;
 import com.sistema_contable.model.Vencimientos;
 
 public class Personalizado extends javax.swing.JPanel {
 
-    int idCliente=0;
-    int idVencimiento=0;
-    
+    int idCliente = 0;
+    int idVencimiento = 0;
+
     public Personalizado() {
         initComponents();
         guardarTexto();
@@ -71,6 +72,8 @@ public class Personalizado extends javax.swing.JPanel {
         txt_dic = new javax.swing.JLabel();
         lb_ruc = new javax.swing.JLabel();
         txt_ruc = new javax.swing.JTextField();
+        venc_box = new javax.swing.JComboBox<>();
+        año_select = new com.toedter.calendar.JYearChooser();
         pnl_action = new javax.swing.JPanel();
         btn_buscar = new javax.swing.JButton();
         btn_limpiar = new javax.swing.JButton();
@@ -86,7 +89,7 @@ public class Personalizado extends javax.swing.JPanel {
 
         lb_ene.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lb_ene.setForeground(new java.awt.Color(0, 0, 0));
-        lb_ene.setText("Ene-2026 :");
+        lb_ene.setText("Ene-20** :");
 
         txt_ene.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         txt_ene.setForeground(new java.awt.Color(0, 0, 0));
@@ -100,8 +103,8 @@ public class Personalizado extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(lb_ene)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txt_ene, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(txt_ene, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         pnl_eneLayout.setVerticalGroup(
             pnl_eneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -118,7 +121,7 @@ public class Personalizado extends javax.swing.JPanel {
 
         lb_feb.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lb_feb.setForeground(new java.awt.Color(0, 0, 0));
-        lb_feb.setText("Feb-2026 :");
+        lb_feb.setText("Feb-20** :");
 
         txt_feb.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         txt_feb.setForeground(new java.awt.Color(0, 0, 0));
@@ -132,8 +135,8 @@ public class Personalizado extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(lb_feb)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txt_feb, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(txt_feb, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         pnl_febLayout.setVerticalGroup(
             pnl_febLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -150,7 +153,7 @@ public class Personalizado extends javax.swing.JPanel {
 
         lb_mar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lb_mar.setForeground(new java.awt.Color(0, 0, 0));
-        lb_mar.setText("Mar-2026 :");
+        lb_mar.setText("Mar-20** :");
 
         txt_mar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         txt_mar.setForeground(new java.awt.Color(0, 0, 0));
@@ -164,8 +167,8 @@ public class Personalizado extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(lb_mar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txt_mar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(txt_mar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         pnl_marLayout.setVerticalGroup(
             pnl_marLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -182,7 +185,7 @@ public class Personalizado extends javax.swing.JPanel {
 
         lb_abr.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lb_abr.setForeground(new java.awt.Color(0, 0, 0));
-        lb_abr.setText("Abr-2026 :");
+        lb_abr.setText("Abr-20** :");
 
         txt_abr.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         txt_abr.setForeground(new java.awt.Color(0, 0, 0));
@@ -196,8 +199,8 @@ public class Personalizado extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(lb_abr)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txt_abr, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(txt_abr, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         pnl_abrLayout.setVerticalGroup(
             pnl_abrLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -214,7 +217,7 @@ public class Personalizado extends javax.swing.JPanel {
 
         lb_may.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lb_may.setForeground(new java.awt.Color(0, 0, 0));
-        lb_may.setText("May-2026 :");
+        lb_may.setText("May-20** :");
 
         txt_may.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         txt_may.setForeground(new java.awt.Color(0, 0, 0));
@@ -228,8 +231,8 @@ public class Personalizado extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(lb_may)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txt_may, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addComponent(txt_may, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
+                .addContainerGap())
         );
         pnl_mayLayout.setVerticalGroup(
             pnl_mayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -246,7 +249,7 @@ public class Personalizado extends javax.swing.JPanel {
 
         lb_jun.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lb_jun.setForeground(new java.awt.Color(0, 0, 0));
-        lb_jun.setText("Jun-2026 :");
+        lb_jun.setText("Jun-20** :");
 
         txt_jun.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         txt_jun.setForeground(new java.awt.Color(0, 0, 0));
@@ -260,8 +263,8 @@ public class Personalizado extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(lb_jun)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txt_jun, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(txt_jun, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         pnl_junLayout.setVerticalGroup(
             pnl_junLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -278,7 +281,7 @@ public class Personalizado extends javax.swing.JPanel {
 
         lb_jul.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lb_jul.setForeground(new java.awt.Color(0, 0, 0));
-        lb_jul.setText("Jul-2026 :");
+        lb_jul.setText("Jul-20** :");
 
         txt_jul.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         txt_jul.setForeground(new java.awt.Color(0, 0, 0));
@@ -292,8 +295,8 @@ public class Personalizado extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(lb_jul)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txt_jul, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(79, Short.MAX_VALUE))
+                .addComponent(txt_jul, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
+                .addContainerGap())
         );
         pnl_julLayout.setVerticalGroup(
             pnl_julLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -310,7 +313,7 @@ public class Personalizado extends javax.swing.JPanel {
 
         lb_ago.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lb_ago.setForeground(new java.awt.Color(0, 0, 0));
-        lb_ago.setText("Ago-2026 :");
+        lb_ago.setText("Ago-20** :");
 
         txt_ago.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         txt_ago.setForeground(new java.awt.Color(0, 0, 0));
@@ -324,8 +327,8 @@ public class Personalizado extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(lb_ago)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txt_ago, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addComponent(txt_ago, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                .addContainerGap())
         );
         pnl_agoLayout.setVerticalGroup(
             pnl_agoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -342,7 +345,7 @@ public class Personalizado extends javax.swing.JPanel {
 
         lb_set.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lb_set.setForeground(new java.awt.Color(0, 0, 0));
-        lb_set.setText("Set-2026 :");
+        lb_set.setText("Set-20** :");
 
         txt_set.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         txt_set.setForeground(new java.awt.Color(0, 0, 0));
@@ -356,8 +359,8 @@ public class Personalizado extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(lb_set)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txt_set, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(75, Short.MAX_VALUE))
+                .addComponent(txt_set, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
+                .addContainerGap())
         );
         pnl_sepLayout.setVerticalGroup(
             pnl_sepLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -374,7 +377,7 @@ public class Personalizado extends javax.swing.JPanel {
 
         lb_oct.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lb_oct.setForeground(new java.awt.Color(0, 0, 0));
-        lb_oct.setText("Oct-2026 :");
+        lb_oct.setText("Oct-20** :");
 
         txt_oct.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         txt_oct.setForeground(new java.awt.Color(0, 0, 0));
@@ -388,8 +391,8 @@ public class Personalizado extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(lb_oct)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txt_oct, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(txt_oct, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         pnl_octLayout.setVerticalGroup(
             pnl_octLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -406,7 +409,7 @@ public class Personalizado extends javax.swing.JPanel {
 
         lb_nov.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lb_nov.setForeground(new java.awt.Color(0, 0, 0));
-        lb_nov.setText("Nov-2026 :");
+        lb_nov.setText("Nov-20** :");
 
         txt_nov.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         txt_nov.setForeground(new java.awt.Color(0, 0, 0));
@@ -420,8 +423,8 @@ public class Personalizado extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(lb_nov)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txt_nov, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(71, Short.MAX_VALUE))
+                .addComponent(txt_nov, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
+                .addContainerGap())
         );
         pnl_novLayout.setVerticalGroup(
             pnl_novLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -438,7 +441,7 @@ public class Personalizado extends javax.swing.JPanel {
 
         lb_dic.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lb_dic.setForeground(new java.awt.Color(0, 0, 0));
-        lb_dic.setText("Dic-2026 :");
+        lb_dic.setText("Dic-20** :");
 
         txt_dic.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         txt_dic.setForeground(new java.awt.Color(0, 0, 0));
@@ -452,8 +455,8 @@ public class Personalizado extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(lb_dic)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txt_dic, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(76, Short.MAX_VALUE))
+                .addComponent(txt_dic, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                .addContainerGap())
         );
         pnl_dicLayout.setVerticalGroup(
             pnl_dicLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -472,6 +475,13 @@ public class Personalizado extends javax.swing.JPanel {
         txt_ruc.setBackground(new java.awt.Color(255, 255, 255));
         txt_ruc.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
+        venc_box.setBackground(new java.awt.Color(255, 255, 255));
+        venc_box.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        venc_box.setForeground(new java.awt.Color(0, 0, 0));
+        venc_box.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ESCOGER VENC", "VENCIMIENTO", "PLE", "AMBOS" }));
+
+        año_select.setBackground(new java.awt.Color(255, 255, 255));
+
         javax.swing.GroupLayout pnl_printLayout = new javax.swing.GroupLayout(pnl_print);
         pnl_print.setLayout(pnl_printLayout);
         pnl_printLayout.setHorizontalGroup(
@@ -483,7 +493,11 @@ public class Personalizado extends javax.swing.JPanel {
                         .addComponent(lb_ruc)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txt_ruc, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(431, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(venc_box, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(año_select, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(pnl_printLayout.createSequentialGroup()
                         .addGroup(pnl_printLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(pnl_jun, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -492,7 +506,7 @@ public class Personalizado extends javax.swing.JPanel {
                             .addComponent(pnl_ene, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(pnl_abr, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(pnl_may, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
                         .addGroup(pnl_printLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_printLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(pnl_oct, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -506,9 +520,13 @@ public class Personalizado extends javax.swing.JPanel {
         pnl_printLayout.setVerticalGroup(
             pnl_printLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_printLayout.createSequentialGroup()
-                .addGroup(pnl_printLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lb_ruc)
-                    .addComponent(txt_ruc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pnl_printLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnl_printLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lb_ruc)
+                        .addComponent(txt_ruc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(venc_box, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(año_select, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addGroup(pnl_printLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnl_printLayout.createSequentialGroup()
@@ -598,9 +616,9 @@ public class Personalizado extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(17, Short.MAX_VALUE)
+                .addContainerGap(21, Short.MAX_VALUE)
                 .addComponent(pnl_print, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(pnl_action, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -613,7 +631,7 @@ public class Personalizado extends javax.swing.JPanel {
                 .addComponent(pnl_action, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnl_print, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addContainerGap(65, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -631,55 +649,98 @@ public class Personalizado extends javax.swing.JPanel {
         txt_nov.setName(txt_nov.getText());
         txt_dic.setName(txt_dic.getText());
     }
-    
+
     private void mostrarMensaje(String mensaje) {
         JOptionPane.showMessageDialog(null, mensaje, "ADVERTENCIA", JOptionPane.INFORMATION_MESSAGE);
     }
-    
+
     private void btn_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buscarActionPerformed
         try {
-            String ruc=txt_ruc.getText();
+            String ruc = txt_ruc.getText();
             if (ruc.isEmpty()) {
                 mostrarMensaje("Ingrese el RUC");
                 return;
             }
 //            int ultimodigito=ruc.charAt(ruc.length()-1)-'0'; NO TOCAR
-            IClienteDao CDao=new ClienteDaoImpl();
-            Cliente cliente=CDao.BuscarPorRUC(ruc);
+            IClienteDao CDao = new ClienteDaoImpl();
+            Cliente cliente = CDao.BuscarPorRUC(ruc);
             if (cliente == null) {
                 mostrarMensaje("Cliente no registrado");
             } else {
                 this.idCliente = cliente.getIdCliente();
-//                System.out.println("Last digit: "+ultimodigito); NO SE, PERO SIRVE :v
-                //vencimientos
-                IVencimientosDao VDao=new VencimientosDaoImpl();
-//                Vencimientos v=VDao.buscarPorRUC(ruc);
-//                if (v==null) {
-//                    mostrarMensaje("No hay vencimientos para este RUC");
-//                } else {
-//                    txt_ene.setText(v.getEnero());
-//                    txt_feb.setText(v.getFebrero());
-//                    txt_mar.setText(v.getMarzo());
-//                    txt_abr.setText(v.getAbril());
-//                    txt_may.setText(v.getMayo());
-//                    txt_jun.setText(v.getJunio());
-//                    txt_jul.setText(v.getJulio());
-//                    txt_ago.setText(v.getAgosto());
-//                    txt_set.setText(v.getSeptiembre());
-//                    txt_oct.setText(v.getOctubre());
-//                    txt_nov.setText(v.getNoviembre());
-//                    txt_dic.setText(v.getDiciembre());
-//                }
+                IVencimientosDao VDao = new VencimientosDaoImpl();
+                int año = (int) año_select.getValue();
+                String tipo = venc_box.getSelectedItem().toString();
+                Vencimientos v = VDao.buscarPorRUC(ruc, año, tipo);
+                if (v == null) {
+                    mostrarMensaje("No hay vencimientos para este RUC");
+                } else {
+                    lb_ene.setText("Ene-" + año + ":");
+                    lb_feb.setText("Feb-" + año + ":");
+                    lb_mar.setText("Mar-" + año + ":");
+                    lb_abr.setText("Abr-" + año + ":");
+                    lb_may.setText("May-" + año + ":");
+                    lb_jun.setText("Jun-" + año + ":");
+                    lb_jul.setText("Jul-" + año + ":");
+                    lb_ago.setText("Ago-" + año + ":");
+                    lb_set.setText("Set-" + año + ":");
+                    lb_oct.setText("Oct-" + año + ":");
+                    lb_nov.setText("Nov-" + año + ":");
+                    lb_dic.setText("Dic-" + año + ":");
+                    if (tipo.equalsIgnoreCase("VENCIMIENTO")) {
+                        txt_ene.setText(v.getEnero());
+                        txt_feb.setText(v.getFebrero());
+                        txt_mar.setText(v.getMarzo());
+                        txt_abr.setText(v.getAbril());
+                        txt_may.setText(v.getMayo());
+                        txt_jun.setText(v.getJunio());
+                        txt_jul.setText(v.getJulio());
+                        txt_ago.setText(v.getAgosto());
+                        txt_set.setText(v.getSeptiembre());
+                        txt_oct.setText(v.getOctubre());
+                        txt_nov.setText(v.getNoviembre());
+                        txt_dic.setText(v.getDiciembre());
+                    } else if (tipo.equalsIgnoreCase("PLE")) {
+                        PLE ple = v.getPle();
+                        txt_ene.setText(ple.getEnero());
+                        txt_feb.setText(ple.getFebrero());
+                        txt_mar.setText(ple.getMarzo());
+                        txt_abr.setText(ple.getAbril());
+                        txt_may.setText(ple.getMayo());
+                        txt_jun.setText(ple.getJunio());
+                        txt_jul.setText(ple.getJulio());
+                        txt_ago.setText(ple.getAgosto());
+                        txt_set.setText(ple.getSeptiembre());
+                        txt_oct.setText(ple.getOctubre());
+                        txt_nov.setText(ple.getNoviembre());
+                        txt_dic.setText(ple.getDiciembre());
+                    } else if (tipo.equalsIgnoreCase("AMBOS")) {
+                        PLE ple = v.getPle();
+                        txt_ene.setText("Venc: " + v.getEnero() + " / PLE: " + ple.getEnero());
+                        txt_feb.setText("Venc: " + v.getFebrero() + " / PLE: " + ple.getFebrero());
+                        txt_mar.setText("Venc: " + v.getMarzo() + " / PLE: " + ple.getMarzo());
+                        txt_abr.setText("Venc: " + v.getAbril() + " / PLE: " + ple.getAbril());
+                        txt_may.setText("Venc: " + v.getMayo() + " / PLE: " + ple.getMayo());
+                        txt_jun.setText("Venc: " + v.getJunio() + " / PLE: " + ple.getJunio());
+                        txt_jul.setText("Venc: " + v.getJulio() + " / PLE: " + ple.getJulio());
+                        txt_ago.setText("Venc: " + v.getAgosto() + " / PLE: " + ple.getAgosto());
+                        txt_set.setText("Venc: " + v.getSeptiembre() + " / PLE: " + ple.getSeptiembre());
+                        txt_oct.setText("Venc: " + v.getOctubre() + " / PLE: " + ple.getOctubre());
+                        txt_nov.setText("Venc: " + v.getNoviembre() + " / PLE: " + ple.getNoviembre());
+                        txt_dic.setText("Venc: " + v.getDiciembre() + " / PLE: " + ple.getDiciembre());
+                    }
+                }
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,"Error al buscar al cliente",
-                    "ERROR",JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al buscar al cliente",
+                    "ERROR", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btn_buscarActionPerformed
 
     private void btn_limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limpiarActionPerformed
         txt_ruc.setText("");
         this.idCliente = 0;
+        //TXT´s
         txt_ene.setText(txt_ene.getName());
         txt_feb.setText(txt_feb.getName());
         txt_mar.setText(txt_mar.getName());
@@ -692,7 +753,23 @@ public class Personalizado extends javax.swing.JPanel {
         txt_oct.setText(txt_oct.getName());
         txt_nov.setText(txt_nov.getName());
         txt_dic.setText(txt_dic.getName());
+        //LABELS
+        lb_ene.setText("Ene-20** :");
+        lb_feb.setText("Feb-20** :");
+        lb_mar.setText("Mar-20** :");
+        lb_abr.setText("Abr-20** :");
+        lb_may.setText("May-20** :");
+        lb_jun.setText("Jun-20** :");
+        lb_jul.setText("Jul-20** :");
+        lb_ago.setText("Ago-20** :");
+        lb_set.setText("Set-20** :");
+        lb_oct.setText("Oct-20** :");
+        lb_nov.setText("Nov-20** :");
+        lb_dic.setText("Dic-20** :");
+        //OTHERS
         txt_ruc.requestFocus();
+        año_select.setValue(2026);
+        venc_box.setSelectedIndex(0);
     }//GEN-LAST:event_btn_limpiarActionPerformed
 
     private void btn_printActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_printActionPerformed
@@ -722,35 +799,11 @@ public class Personalizado extends javax.swing.JPanel {
                 ex.printStackTrace();
             }
         }
-//        PrinterJob printerJob = PrinterJob.getPrinterJob();
-//        printerJob.setPrintable((graphics, pageFormat, pageIndex) -> {
-//            if (pageIndex > 0) {
-//                return Printable.NO_SUCH_PAGE;
-//            }
-//            Graphics2D g2d = (Graphics2D) graphics;
-//            pageFormat.setOrientation(PageFormat.LANDSCAPE);
-//            g2d.translate(
-//                    pageFormat.getImageableX(),
-//                    pageFormat.getImageableY()
-//            );
-//            double scaleX = pageFormat.getImageableWidth() / pnl_print.getWidth();
-//            double scaleY = pageFormat.getImageableHeight() / pnl_print.getHeight();
-//            double scale = Math.min(scaleX, scaleY);
-//            g2d.scale(scale, scale);
-//            pnl_print.printAll(g2d);
-//            return Printable.PAGE_EXISTS;
-//        });
-//        if (printerJob.printDialog()) {
-//            try {
-//                printerJob.print();
-//            } catch (PrinterException ex) {
-//                ex.printStackTrace();
-//            }
-//        }
     }//GEN-LAST:event_btn_printActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.toedter.calendar.JYearChooser año_select;
     private javax.swing.JButton btn_buscar;
     private javax.swing.JButton btn_limpiar;
     private javax.swing.JButton btn_print;
@@ -794,5 +847,6 @@ public class Personalizado extends javax.swing.JPanel {
     private javax.swing.JLabel txt_oct;
     private javax.swing.JTextField txt_ruc;
     private javax.swing.JLabel txt_set;
+    private javax.swing.JComboBox<String> venc_box;
     // End of variables declaration//GEN-END:variables
 }

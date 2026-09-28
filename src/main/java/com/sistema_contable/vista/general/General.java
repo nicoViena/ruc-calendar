@@ -22,6 +22,16 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import com.sistema_contable.model.Cliente;
 import com.sistema_contable.model.Vencimientos;
+import org.apache.poi.ss.usermodel.BorderStyle;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.VerticalAlignment;
+import org.apache.poi.ss.util.CellRangeAddress;
+import org.apache.poi.xssf.usermodel.XSSFFont;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 
 public class General extends javax.swing.JPanel {
@@ -373,223 +383,148 @@ public class General extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_excelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_excelActionPerformed
-//        try {
-//            // ================= FILECHOOSER =================
-//            JFileChooser chooser = new JFileChooser();
-//            chooser.setDialogTitle("Guardar Excel");
-//            chooser.setSelectedFile(new File("Cronograma.xlsx"));
-//            if (chooser.showSaveDialog(this) != JFileChooser.APPROVE_OPTION) {
-//                return;
-//            }
-//            File file = chooser.getSelectedFile();
-//            String path = file.getAbsolutePath();
-//            if (!path.toLowerCase().endsWith(".xlsx")) {
-//                path += ".xlsx";
-//            }
-//            // ================= PERIODO =================
-//            int year = 2026; // puedes hacerlo dinámico
-//            String periodoExcel = periodo_Excel(txt_periodo.getText(), year);
-//
-//            if (periodoExcel == null) {
-//                JOptionPane.showMessageDialog(null, "Periodo inválido");
-//                return;
-//            }
-//            TableModel model = tbl_general.getModel();
-//            // ================= WORKBOOK =================
-//            XSSFWorkbook workbook = new XSSFWorkbook();
-//            XSSFSheet sheet = workbook.createSheet("Cronograma");
-//            int startRow = 0;
-//            int totalCols = model.getColumnCount() + 4; // A,B + tabla + G,H
-//            // ================= ESTILOS =================
-//            CellStyle borderStyle = workbook.createCellStyle();
-//            borderStyle.setBorderTop(BorderStyle.THIN);
-//            borderStyle.setBorderBottom(BorderStyle.THIN);
-//            borderStyle.setBorderLeft(BorderStyle.THIN);
-//            borderStyle.setBorderRight(BorderStyle.THIN);
-//            // ---- TITULO ----
-//            CellStyle titleStyle = workbook.createCellStyle();
-//            titleStyle.cloneStyleFrom(borderStyle);
-//            titleStyle.setAlignment(HorizontalAlignment.CENTER);
-//            titleStyle.setVerticalAlignment(VerticalAlignment.CENTER);
-//            XSSFFont titleFont = workbook.createFont();
-//            titleFont.setBold(true);
-//            titleFont.setFontHeightInPoints((short) 13);
-//            titleStyle.setFont(titleFont);
-//            // ---- ENCABEZADOS ----
-//            CellStyle headerStyle = workbook.createCellStyle();
-//            headerStyle.cloneStyleFrom(borderStyle);
-//            headerStyle.setAlignment(HorizontalAlignment.CENTER);
-//            XSSFFont headerFont = workbook.createFont();
-//            headerFont.setBold(true);
-//            headerStyle.setFont(headerFont);
-//            // ---- CENTRADO ----
-//            CellStyle centerStyle = workbook.createCellStyle();
-//            centerStyle.cloneStyleFrom(borderStyle);
-//            centerStyle.setAlignment(HorizontalAlignment.CENTER);
-//            // ================= TITULO =================
-//            Row titleRow = sheet.createRow(startRow);
-//            Cell titleCell = titleRow.createCell(0);
-//            titleCell.setCellValue(
-//                "CRONOGRAMA DE VENCIMIENTO MENSUAL (PERIODO: " + periodoExcel + ")"
-//            );
-//            titleCell.setCellStyle(titleStyle);
-//            // Merge de A hasta H
-//            sheet.addMergedRegion(
-//                new CellRangeAddress(startRow, startRow, 0, totalCols - 1)
-//            );
-//            // Aplicar estilo a toda la fila del título
-//            for (int c = 0; c < totalCols; c++) {
-//                Cell cell = titleRow.getCell(c);
-//                if (cell == null) {
-//                    cell = titleRow.createCell(c);
-//                }
-//                cell.setCellStyle(titleStyle);
-//            }
-//            // ================= ENCABEZADOS =================
-//            Row headerRow = sheet.createRow(startRow + 1);
-//            // Columnas A y B vacías con borde
-//            for (int c = 0; c < 2; c++) {
-//                Cell cell = headerRow.createCell(c);
-//                cell.setCellStyle(borderStyle);
-//            }
-//            // Encabezados reales del JTable
-//            for (int col = 0; col < model.getColumnCount(); col++) {
-//                Cell cell = headerRow.createCell(col + 2);
-//                cell.setCellValue(model.getColumnName(col));
-//                cell.setCellStyle(headerStyle);
-//            }
-//            // Columnas G y H vacías con borde
-//            for (int c = model.getColumnCount() + 2; c < totalCols; c++) {
-//                Cell cell = headerRow.createCell(c);
-//                cell.setCellStyle(borderStyle);
-//            }
-//            // ================= DATOS =================
-//            for (int row = 0; row < model.getRowCount(); row++) {
-//                Row excelRow = sheet.createRow(startRow + 2 + row);
-//                // Columnas A y B vacías con borde
-//                for (int c = 0; c < 2; c++) {
-//                    Cell cell = excelRow.createCell(c);
-//                    cell.setCellStyle(borderStyle);
-//                }
-//                // Datos del JTable
-//                for (int col = 0; col < model.getColumnCount(); col++) {
-//                    Cell cell = excelRow.createCell(col + 2);
-//                    Object value = model.getValueAt(row, col);
-//                    if (value != null) {
-//                        cell.setCellValue(value.toString());
-//                    }
-//                    if (model.getColumnName(col).equalsIgnoreCase("Vencimiento")) {
-//                        cell.setCellStyle(centerStyle);
-//                    } else {
-//                        cell.setCellStyle(borderStyle);
-//                    }
-//                }
-//                // Columnas G y H vacías con borde
-//                for (int c = model.getColumnCount() + 2; c < totalCols; c++) {
-//                    Cell cell = excelRow.createCell(c);
-//                    cell.setCellStyle(borderStyle);
-//                }
-//            }
-//            // ================= AUTO SIZE =================
-//            for (int c = 0; c < totalCols; c++) {
-//                sheet.autoSizeColumn(c);
-//            }
-//            // ================= GUARDAR =================
-//            try (FileOutputStream out = new FileOutputStream(path)) {
-//                workbook.write(out);
-//            }
-//            workbook.close();
-//            JOptionPane.showMessageDialog(null, "Excel generado correctamente");
-//            //            // Selector de archivo
-//            //            javax.swing.JFileChooser fileChooser = new javax.swing.JFileChooser();
-//            //            fileChooser.setDialogTitle("Guardar Excel");
-//            //            fileChooser.setSelectedFile(new java.io.File("tabla.xlsx"));
-//            //            int userSelection = fileChooser.showSaveDialog(this);
-//            //            if (userSelection != javax.swing.JFileChooser.APPROVE_OPTION) {
-//                //                return; // Cancelado
-//                //            }
-//            //            java.io.File fileToSave = fileChooser.getSelectedFile();
-//            //            String path = fileToSave.getAbsolutePath();
-//            //            if (!path.toLowerCase().endsWith(".xlsx")) {
-//                //                path += ".xlsx";
-//                //            }
-//            //            TableModel model = tbl_general.getModel(); // tu JTable
-//            //            // Crear libro y hoja de Excel
-//            //            org.apache.poi.xssf.usermodel.XSSFWorkbook workbook = new org.apache.poi.xssf.usermodel.XSSFWorkbook();
-//            //            org.apache.poi.xssf.usermodel.XSSFSheet sheet = workbook.createSheet("Tabla");
-//            //
-//            //            int startRow = 1; // fila inicial (desplazada 1 hacia abajo)
-//            //            int startCol = 2; // columna inicial (desplazada 2 a la derecha)
-//            //            // --- Estilo con bordes ---
-//            //            org.apache.poi.ss.usermodel.CellStyle borderStyle = workbook.createCellStyle();
-//            //            borderStyle.setBorderTop(org.apache.poi.ss.usermodel.BorderStyle.THIN);
-//            //            borderStyle.setBorderBottom(org.apache.poi.ss.usermodel.BorderStyle.THIN);
-//            //            borderStyle.setBorderLeft(org.apache.poi.ss.usermodel.BorderStyle.THIN);
-//            //            borderStyle.setBorderRight(org.apache.poi.ss.usermodel.BorderStyle.THIN);
-//            //            // --- Estilo encabezado (bordes + negrita + centrado) ---
-//            //            org.apache.poi.ss.usermodel.CellStyle headerStyle = workbook.createCellStyle();
-//            //            headerStyle.cloneStyleFrom(borderStyle); // copiar bordes
-//            //            headerStyle.setAlignment(org.apache.poi.ss.usermodel.HorizontalAlignment.CENTER);
-//            //            org.apache.poi.xssf.usermodel.XSSFFont font = workbook.createFont();
-//            //            font.setBold(true);
-//            //            headerStyle.setFont(font);
-//            //            // --- Encabezados ---
-//            //            org.apache.poi.ss.usermodel.Row headerRow = sheet.createRow(startRow);
-//            //            for (int col = 0; col < model.getColumnCount(); col++) {
-//                //                org.apache.poi.ss.usermodel.Cell cell = headerRow.createCell(startCol + col);
-//                //                cell.setCellValue(model.getColumnName(col));
-//                //                cell.setCellStyle(headerStyle); // aplicar estilo encabezado
-//                //            }
-//            //            // --- Estilo centrado para columna de Vencimiento ---
-//            //            org.apache.poi.ss.usermodel.CellStyle centerStyle = workbook.createCellStyle();
-//            //            centerStyle.cloneStyleFrom(borderStyle);
-//            //            centerStyle.setAlignment(org.apache.poi.ss.usermodel.HorizontalAlignment.CENTER);
-//            //            // --- Datos ---
-//            //            for (int row = 0; row < model.getRowCount(); row++) {
-//                //                org.apache.poi.ss.usermodel.Row excelRow = sheet.createRow(startRow + 1 + row);
-//                //                for (int col = 0; col < model.getColumnCount(); col++) {
-//                    //                    org.apache.poi.ss.usermodel.Cell cell = excelRow.createCell(startCol + col);
-//                    //                    Object value = model.getValueAt(row, col);
-//                    //                    if (value != null) {
-//                        //                        if (value instanceof Number) {
-//                            //                            cell.setCellValue(((Number) value).doubleValue());
-//                            //                        } else {
-//                            //                            cell.setCellValue(value.toString());
-//                            //                        }
-//                        //                    }
-//                    //                    // Si es la columna "Vencimiento", centrar
-//                    //                    if (model.getColumnName(col).equalsIgnoreCase("Vencimiento")) {
-//                        //                        cell.setCellStyle(centerStyle);
-//                        //                    } else {
-//                        //                        cell.setCellStyle(borderStyle);
-//                        //                    }
-//                    //                }
-//                //            }
-//            //            // Ajustar ancho de columnas automáticamente
-//            //            for (int col = 0; col < model.getColumnCount(); col++) {
-//                //                sheet.autoSizeColumn(startCol + col);
-//                //            }
-//            //            // Guardar archivo
-//            //            try (java.io.FileOutputStream out = new java.io.FileOutputStream(path)) {
-//                //                workbook.write(out);
-//                //            }
-//            //            workbook.close();
-//            //            javax.swing.JOptionPane.showMessageDialog(this, "Tabla exportada correctamente a:\n" + path);
-//        } catch (Exception e) {
-//            JOptionPane.showMessageDialog(null, "Error al exportar a Excel","ERROR", JOptionPane.WARNING_MESSAGE);
-//            e.printStackTrace();
-//        }
+        try {
+            // ================= FILECHOOSER =================
+            JFileChooser chooser = new JFileChooser();
+            chooser.setDialogTitle("Guardar Excel");
+            chooser.setSelectedFile(new File("Cronograma.xlsx"));
+            if (chooser.showSaveDialog(this) != JFileChooser.APPROVE_OPTION) {
+                return;
+            }
+            File file = chooser.getSelectedFile();
+            String path = file.getAbsolutePath();
+            if (!path.toLowerCase().endsWith(".xlsx")) {
+                path += ".xlsx";
+            }
+            // ================= PERIODO =================
+            int year = 2026; // puedes hacerlo dinámico
+            String periodoExcel = periodo_Excel(txt_periodo.getText(), year);
+
+            if (periodoExcel == null) {
+                JOptionPane.showMessageDialog(null, "Periodo inválido");
+                return;
+            }
+            TableModel model = tbl_general.getModel();
+            // ================= WORKBOOK =================
+            XSSFWorkbook workbook = new XSSFWorkbook();
+            XSSFSheet sheet = workbook.createSheet("Cronograma");
+            int startRow = 0;
+            int totalCols = model.getColumnCount() + 4; // A,B + tabla + G,H
+            // ================= ESTILOS =================
+            CellStyle borderStyle = workbook.createCellStyle();
+            borderStyle.setBorderTop(BorderStyle.THIN);
+            borderStyle.setBorderBottom(BorderStyle.THIN);
+            borderStyle.setBorderLeft(BorderStyle.THIN);
+            borderStyle.setBorderRight(BorderStyle.THIN);
+            // ---- TITULO ----
+            CellStyle titleStyle = workbook.createCellStyle();
+            titleStyle.cloneStyleFrom(borderStyle);
+            titleStyle.setAlignment(HorizontalAlignment.CENTER);
+            titleStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+            XSSFFont titleFont = workbook.createFont();
+            titleFont.setBold(true);
+            titleFont.setFontHeightInPoints((short) 13);
+            titleStyle.setFont(titleFont);
+            // ---- ENCABEZADOS ----
+            CellStyle headerStyle = workbook.createCellStyle();
+            headerStyle.cloneStyleFrom(borderStyle);
+            headerStyle.setAlignment(HorizontalAlignment.CENTER);
+            XSSFFont headerFont = workbook.createFont();
+            headerFont.setBold(true);
+            headerStyle.setFont(headerFont);
+            // ---- CENTRADO ----
+            CellStyle centerStyle = workbook.createCellStyle();
+            centerStyle.cloneStyleFrom(borderStyle);
+            centerStyle.setAlignment(HorizontalAlignment.CENTER);
+            // ================= TITULO =================
+            Row titleRow = sheet.createRow(startRow);
+            Cell titleCell = titleRow.createCell(0);
+            titleCell.setCellValue(
+                "CRONOGRAMA DE VENCIMIENTO MENSUAL (PERIODO: " + periodoExcel + ")"
+            );
+            titleCell.setCellStyle(titleStyle);
+            // Merge de A hasta H
+            sheet.addMergedRegion(
+                new CellRangeAddress(startRow, startRow, 0, totalCols - 1)
+            );
+            // Aplicar estilo a toda la fila del título
+            for (int c = 0; c < totalCols; c++) {
+                Cell cell = titleRow.getCell(c);
+                if (cell == null) {
+                    cell = titleRow.createCell(c);
+                }
+                cell.setCellStyle(titleStyle);
+            }
+            // ================= ENCABEZADOS =================
+            Row headerRow = sheet.createRow(startRow + 1);
+            // Columnas A y B vacías con borde
+            for (int c = 0; c < 2; c++) {
+                Cell cell = headerRow.createCell(c);
+                cell.setCellStyle(borderStyle);
+            }
+            // Encabezados reales del JTable
+            for (int col = 0; col < model.getColumnCount(); col++) {
+                Cell cell = headerRow.createCell(col + 2);
+                cell.setCellValue(model.getColumnName(col));
+                cell.setCellStyle(headerStyle);
+            }
+            // Columnas G y H vacías con borde
+            for (int c = model.getColumnCount() + 2; c < totalCols; c++) {
+                Cell cell = headerRow.createCell(c);
+                cell.setCellStyle(borderStyle);
+            }
+            // ================= DATOS =================
+            for (int row = 0; row < model.getRowCount(); row++) {
+                Row excelRow = sheet.createRow(startRow + 2 + row);
+                // Columnas A y B vacías con borde
+                for (int c = 0; c < 2; c++) {
+                    Cell cell = excelRow.createCell(c);
+                    cell.setCellStyle(borderStyle);
+                }
+                // Datos del JTable
+                for (int col = 0; col < model.getColumnCount(); col++) {
+                    Cell cell = excelRow.createCell(col + 2);
+                    Object value = model.getValueAt(row, col);
+                    if (value != null) {
+                        cell.setCellValue(value.toString());
+                    }
+                    if (model.getColumnName(col).equalsIgnoreCase("Vencimiento")) {
+                        cell.setCellStyle(centerStyle);
+                    } else {
+                        cell.setCellStyle(borderStyle);
+                    }
+                }
+                // Columnas G y H vacías con borde
+                for (int c = model.getColumnCount() + 2; c < totalCols; c++) {
+                    Cell cell = excelRow.createCell(c);
+                    cell.setCellStyle(borderStyle);
+                }
+            }
+            // ================= AUTO SIZE =================
+            for (int c = 0; c < totalCols; c++) {
+                sheet.autoSizeColumn(c);
+            }
+            // ================= GUARDAR =================
+            try (FileOutputStream out = new FileOutputStream(path)) {
+                workbook.write(out);
+            }
+            workbook.close();
+            JOptionPane.showMessageDialog(null, "Excel generado correctamente");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al exportar a Excel","ERROR", JOptionPane.WARNING_MESSAGE);
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_btn_excelActionPerformed
 
     private void btn_printActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_printActionPerformed
-//        try {
-//            String periodo = txt_periodo.getText().trim();
-//            MessageFormat header = new MessageFormat("Periodo: " + periodo);
-//            MessageFormat footer = new MessageFormat("Página {0}");
-//            tbl_general.print(JTable.PrintMode.FIT_WIDTH,header,footer);
-//        } catch (PrinterException ex) {
-//            ex.printStackTrace();
-//        }
+        try {
+            String periodo = txt_periodo.getText().trim();
+            MessageFormat header = new MessageFormat("Periodo: " + periodo);
+            MessageFormat footer = new MessageFormat("Página {0}");
+            tbl_general.print(JTable.PrintMode.FIT_WIDTH,header,footer);
+        } catch (PrinterException ex) {
+            ex.printStackTrace();
+        }
     }//GEN-LAST:event_btn_printActionPerformed
 
     private void btn_limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limpiarActionPerformed
