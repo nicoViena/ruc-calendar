@@ -33,17 +33,18 @@ import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-public class General extends javax.swing.JPanel {
+
+public class General1 extends javax.swing.JPanel {
 
     IClienteDao CDao = new ClienteDaoImpl();
-    Cliente c = new Cliente();
-
-    public General() {
+    Cliente c=new Cliente();
+    
+    public General1() {
         initComponents();
         CargarClientes();
     }
-
-    public void CargarClientes() {
+    
+    public void CargarClientes(){
         List<Cliente> lista = CDao.listar();
         DefaultTableModel table = (DefaultTableModel) tbl_clientes.getModel();
         table.setNumRows(0);
@@ -186,7 +187,6 @@ public class General extends javax.swing.JPanel {
         pnl_printLayout.setVerticalGroup(
             pnl_printLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_printLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnl_printLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lb_periodo)
                     .addComponent(txt_periodo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -440,12 +440,12 @@ public class General extends javax.swing.JPanel {
             Row titleRow = sheet.createRow(startRow);
             Cell titleCell = titleRow.createCell(0);
             titleCell.setCellValue(
-                    "CRONOGRAMA DE VENCIMIENTO MENSUAL (PERIODO: " + periodoExcel + ")"
+                "CRONOGRAMA DE VENCIMIENTO MENSUAL (PERIODO: " + periodoExcel + ")"
             );
             titleCell.setCellStyle(titleStyle);
             // Merge de A hasta H
             sheet.addMergedRegion(
-                    new CellRangeAddress(startRow, startRow, 0, totalCols - 1)
+                new CellRangeAddress(startRow, startRow, 0, totalCols - 1)
             );
             // Aplicar estilo a toda la fila del título
             for (int c = 0; c < totalCols; c++) {
@@ -511,7 +511,7 @@ public class General extends javax.swing.JPanel {
             workbook.close();
             JOptionPane.showMessageDialog(null, "Excel generado correctamente");
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al exportar a Excel", "ERROR", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al exportar a Excel","ERROR", JOptionPane.WARNING_MESSAGE);
             e.printStackTrace();
         }
     }//GEN-LAST:event_btn_excelActionPerformed
@@ -521,7 +521,7 @@ public class General extends javax.swing.JPanel {
             String periodo = txt_periodo.getText().trim();
             MessageFormat header = new MessageFormat("Periodo: " + periodo);
             MessageFormat footer = new MessageFormat("Página {0}");
-            tbl_general.print(JTable.PrintMode.FIT_WIDTH, header, footer);
+            tbl_general.print(JTable.PrintMode.FIT_WIDTH,header,footer);
         } catch (PrinterException ex) {
             ex.printStackTrace();
         }
@@ -529,9 +529,9 @@ public class General extends javax.swing.JPanel {
 
     private void btn_limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limpiarActionPerformed
         //TABLA GENERAL
-        DefaultTableModel model = (DefaultTableModel) tbl_general.getModel();
-        int filas = model.getRowCount();
-        int columnas = model.getColumnCount();
+        DefaultTableModel model=(DefaultTableModel)tbl_general.getModel();
+        int filas=model.getRowCount();
+        int columnas=model.getColumnCount();
         for (int i = 0; i < filas; i++) {
             for (int j = 0; j < columnas; j++) {
                 model.setValueAt("", i, j);
@@ -539,7 +539,7 @@ public class General extends javax.swing.JPanel {
         }
         txt_periodo.setText("");
         //TABLA CLIENTES
-        DefaultTableModel modelC = (DefaultTableModel) tbl_clientes.getModel();
+        DefaultTableModel modelC=(DefaultTableModel)tbl_clientes.getModel();
         for (int i = 0; i < modelC.getRowCount(); i++) {
             modelC.setValueAt(false, i, 0);
         }
@@ -547,7 +547,11 @@ public class General extends javax.swing.JPanel {
 
     private void btn_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buscarActionPerformed
         try {
-            String periodo = txt_periodo.getText().trim();
+            //MODELO ACTUALIZADO
+            String periodo=txt_periodo.getText().trim();
+            if (periodo.contains("-")) {
+                periodo=periodo.split("-")[0];
+            }
             if (periodo.isEmpty()) {
                 mostrarMensaje("Ingrese el periodo");
                 return;
@@ -557,112 +561,85 @@ public class General extends javax.swing.JPanel {
                 mostrarMensaje("Periodo Invalido");
                 return;
             }
-            int año = obtenerAño(periodo);
-            if (año == -1) {
-                mostrarMensaje("Ingrese el año junto al periodo");
-                return;
-            }
-            System.out.println("Mes columna: " + mes);
-            System.out.println("Año: " + año);
-            List<String> rucsSeleccionados = new ArrayList<>();
-            DefaultTableModel modelClientes = (DefaultTableModel) tbl_clientes.getModel();
+            System.out.println("Mes columna: "+mes);
+            // 🔹 1. OBTENER CLIENTES SELECCIONADOS (RUC)
+            List<String> rucsSeleccionados=new ArrayList<>();
+            DefaultTableModel modelClientes=(DefaultTableModel) tbl_clientes.getModel();
             for (int i = 0; i < modelClientes.getRowCount(); i++) {
-                Boolean sel = (Boolean) modelClientes.getValueAt(i, 0);
+                Boolean sel=(Boolean) modelClientes.getValueAt(i, 0);
                 if (Boolean.TRUE.equals(sel)) {
                     rucsSeleccionados.add(
-                            modelClientes.getValueAt(i, 2).toString() // columna RUC
+                        modelClientes.getValueAt(i, 2).toString() // columna RUC
                     );
                 }
             }
-            VencimientosDaoImpl VDao = new VencimientosDaoImpl();
-            List<Vencimientos> lista = VDao.buscarPorPeriodo(mes, año);
-            if (lista == null || lista.isEmpty()) {
-                mostrarMensaje("No hay vencimientos para este periodo");
-                return;
-            }
-            DefaultTableModel model = (DefaultTableModel) tbl_general.getModel();
-            model.setRowCount(0);
-            if (rucsSeleccionados.isEmpty()) {
-                for (Vencimientos v : lista) {
-                    model.addRow(new Object[]{
-                        v.getCliente().getNombre(),
-                        v.getCliente().getRUC(),
-                        v.getVencimiento(),
-                        v.getPle().getVencimiento_ple()
-                    });
-                }
-            } else {
-                for (Vencimientos v : lista) {
-                    if (rucsSeleccionados.contains(v.getCliente().getRUC())) {
-                        model.addRow(new Object[]{
-                            v.getCliente().getNombre(),
-                            v.getCliente().getRUC(),
-                            v.getVencimiento(),
-                            v.getPle().getVencimiento_ple()
-                        });
-                    }
-                }
-            }
+            VencimientosDaoImpl VDao=new VencimientosDaoImpl();
+//            int año = (int) año_select.getValue();
+//            List<Vencimientos> lista=VDao.buscarPorPeriodo(mes, año);
+//            if (lista == null || lista.isEmpty()) {
+//                mostrarMensaje("No hay vencimientos para este periodo");
+//                return;
+//            }
+//            DefaultTableModel model=(DefaultTableModel) tbl_general.getModel();
+//            model.setRowCount(0);
+//            // 🔹 2. SI NO HAY SELECCIONADOS → MOSTRAR TODOS
+//            if (rucsSeleccionados.isEmpty()) {
+//                for (Vencimientos v : lista) {
+//                    model.addRow(new Object[]{
+//                        v.getCliente().getNombre(),
+//                        v.getCliente().getRUC(),
+//                        v.getVencimiento(),
+//                        v.getPle().getVencimiento_ple()
+//                    });
+//                }
+//            } // 🔹 3. SI HAY SELECCIONADOS → FILTRAR
+//            else {
+//                for (Vencimientos v : lista) {
+//                    if (rucsSeleccionados.contains(v.getCliente().getRUC())) {
+//                        model.addRow(new Object[]{
+//                            v.getCliente().getNombre(),
+//                            v.getCliente().getRUC(),
+//                            v.getVencimiento(),
+//                            v.getPle().getVencimiento_ple()
+//                        });
+//                    }
+//                }
+//            }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al realizar la busqueda", "ERROR", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al realizar la busqueda","ERROR", JOptionPane.WARNING_MESSAGE);
             e.printStackTrace();
         }
     }//GEN-LAST:event_btn_buscarActionPerformed
 
-    private String periodo_Excel(String textoPeriodo, int year) {
-        String mes_complet = obtenerMes(textoPeriodo);
-        if (mes_complet == null) {
+    private String periodo_Excel(String textoPeriodo, int year){
+        String mes_complet=obtenerMes(textoPeriodo);
+        if (mes_complet==null) {
             return null;
         }
         String mes_excel;
         switch (mes_complet) {
-            case "enero":
-                mes_excel = "Ene";
-                break;
-            case "febrero":
-                mes_excel = "Feb";
-                break;
-            case "marzo":
-                mes_excel = "Mar";
-                break;
-            case "abril":
-                mes_excel = "Abr";
-                break;
-            case "mayo":
-                mes_excel = "May";
-                break;
-            case "junio":
-                mes_excel = "Jun";
-                break;
-            case "julio":
-                mes_excel = "Jul";
-                break;
-            case "agosto":
-                mes_excel = "Ago";
-                break;
-            case "septiembre":
-                mes_excel = "Sep";
-                break;
-            case "octubre":
-                mes_excel = "Oct";
-                break;
-            case "noviembre":
-                mes_excel = "Nov";
-                break;
-            case "diciembre":
-                mes_excel = "Dic";
-                break;
-            default:
-                return null;
+            case "enero": mes_excel = "Ene"; break;
+            case "febrero": mes_excel = "Feb"; break;
+            case "marzo": mes_excel = "Mar"; break;
+            case "abril": mes_excel = "Abr"; break;
+            case "mayo": mes_excel = "May"; break;
+            case "junio": mes_excel = "Jun"; break;
+            case "julio": mes_excel = "Jul"; break;
+            case "agosto": mes_excel = "Ago"; break;
+            case "septiembre": mes_excel = "Sep"; break;
+            case "octubre": mes_excel = "Oct"; break;
+            case "noviembre": mes_excel = "Nov"; break;
+            case "diciembre": mes_excel = "Dic"; break;
+            default: return null;
         }
         return mes_excel + "-" + year;
     }
-
-    private String obtenerMes(String mes) {
-        if (mes == null || mes.length() < 3) {
+    
+    private String obtenerMes(String mes){
+        if (mes==null||mes.length()<3) {
             return null;
         }
-        mes = mes.substring(0, 3).toLowerCase();
+        mes=mes.substring(0,3).toLowerCase();
         if (mes.equals("ene")) {
             return "enero";
         } else if (mes.equals("feb")) {
@@ -691,19 +668,11 @@ public class General extends javax.swing.JPanel {
             return null;
         }
     }
-
-    private int obtenerAño(String periodo) {
-        String numeros = periodo.replaceAll("\\D", "");
-        if (numeros.length() == 4) {
-            return Integer.parseInt(numeros);
-        }
-        return -1;
-    }
-
+    
     private void mostrarMensaje(String mensaje) {
         JOptionPane.showMessageDialog(null, mensaje, "ADVERTENCIA", JOptionPane.INFORMATION_MESSAGE);
     }
-
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_buscar;

@@ -55,21 +55,21 @@ public class ListaCliente extends javax.swing.JPanel {
         tbl_clientes.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         tbl_clientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "ID", "RUC", "NOMBRE"
+                "NOMBRE", "RUC"
             }
         ));
         jScrollPane1.setViewportView(tbl_clientes);
         if (tbl_clientes.getColumnModel().getColumnCount() > 0) {
-            tbl_clientes.getColumnModel().getColumn(0).setMinWidth(35);
-            tbl_clientes.getColumnModel().getColumn(0).setMaxWidth(35);
-            tbl_clientes.getColumnModel().getColumn(1).setMinWidth(103);
-            tbl_clientes.getColumnModel().getColumn(1).setMaxWidth(103);
+            tbl_clientes.getColumnModel().getColumn(0).setMinWidth(103);
+            tbl_clientes.getColumnModel().getColumn(0).setMaxWidth(103);
+            tbl_clientes.getColumnModel().getColumn(1).setMinWidth(35);
+            tbl_clientes.getColumnModel().getColumn(1).setMaxWidth(35);
         }
 
         btn_agregar.setBackground(new java.awt.Color(3, 187, 133));
