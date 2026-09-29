@@ -23,9 +23,8 @@ public class ListaCliente extends javax.swing.JPanel {
         table.setNumRows(0);
         for (Cliente c : lista) {
             Object[] rowData = {
-                c.getIdCliente(),
-                c.getRUC(),
-                c.getNombre()
+                c.getNombre(),
+                c.getRUC()
             };
             table.addRow(rowData);
         }
@@ -66,10 +65,10 @@ public class ListaCliente extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tbl_clientes);
         if (tbl_clientes.getColumnModel().getColumnCount() > 0) {
-            tbl_clientes.getColumnModel().getColumn(0).setMinWidth(103);
-            tbl_clientes.getColumnModel().getColumn(0).setMaxWidth(103);
-            tbl_clientes.getColumnModel().getColumn(1).setMinWidth(35);
-            tbl_clientes.getColumnModel().getColumn(1).setMaxWidth(35);
+            tbl_clientes.getColumnModel().getColumn(0).setResizable(false);
+            tbl_clientes.getColumnModel().getColumn(0).setPreferredWidth(350);
+            tbl_clientes.getColumnModel().getColumn(1).setResizable(false);
+            tbl_clientes.getColumnModel().getColumn(1).setPreferredWidth(50);
         }
 
         btn_agregar.setBackground(new java.awt.Color(3, 187, 133));
