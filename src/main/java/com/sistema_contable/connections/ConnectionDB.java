@@ -23,7 +23,7 @@ public class ConnectionDB {
             System.out.println("Conectado correctamente");
             return conexion;
         } catch (SQLException e) {
-            System.out.println("Error al conectar con PostgreSQL:");
+            System.out.println("Error al conectar:");
             System.out.println(e.getMessage());
             return null;
         } catch (Exception e) {

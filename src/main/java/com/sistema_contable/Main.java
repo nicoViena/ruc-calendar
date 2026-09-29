@@ -8,6 +8,5 @@ public class Main {
         Inicio i=new Inicio();
         i.setVisible(true);
         i.setLocationRelativeTo(null);
-        //test
     }
 }

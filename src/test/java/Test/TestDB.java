@@ -12,8 +12,8 @@ public class TestDB {
                 Statement st = cn.createStatement();
                 ResultSet rs = st.executeQuery(sql);
                 if (rs.next()) {
-                    System.out.println("Base de datos: " + rs.getString(1));
-                    System.out.println("Usuario: " + rs.getString(2));
+                    System.out.println("DataBase: " + rs.getString(1));
+                    System.out.println("USER: " + rs.getString(2));
                 }
             }
         } catch (SQLException e) {

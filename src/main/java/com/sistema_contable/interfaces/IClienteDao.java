@@ -8,6 +8,5 @@ public interface IClienteDao {
     public List<Cliente> listar();
     public boolean editar(Cliente c);
     public boolean eliminar(Cliente c);
-    //public Cliente BuscarPorId(int id);
     public Cliente BuscarPorRUC(String RUC);
 }

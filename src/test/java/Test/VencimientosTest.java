@@ -4,7 +4,7 @@ import com.sistema_contable.Implements.VencimientosDaoImpl;
 import com.sistema_contable.interfaces.IVencimientosDao;
 import com.sistema_contable.model.Vencimientos;
 import com.sistema_contable.model.PLE;
-import java.util.List;
+//import java.util.List;
 
 public class VencimientosTest {
 
@@ -18,7 +18,7 @@ public class VencimientosTest {
     public void buscarRUC() {
         String ruc = "20542369648";
         int año = 2026;
-        String tipo = "VENCIMIENTO";
+        String tipo = "AMBOS";
         Vencimientos v = dao.buscarPorRUC(ruc, año, tipo);
         if (v != null) {
             System.out.println("RUC: " + ruc);

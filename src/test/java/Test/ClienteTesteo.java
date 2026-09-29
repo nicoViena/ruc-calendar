@@ -12,12 +12,11 @@ public class ClienteTesteo {
 
     public static void main(String[] args) {
         ClienteTesteo t = new ClienteTesteo();
-//        t.insertar();
-//        t.listar();
-//        t.eliminar();
-//        t.editar();
-//        (t.listarClientePorId();) --> Por el momento no necesario
-//        t.listarClientePorRUC();
+        t.insertar();
+        t.listar();
+        t.eliminar();
+        t.editar();
+        t.listarClientePorRUC();
     }
 
     public void insertar() {
@@ -68,18 +67,6 @@ public class ClienteTesteo {
             System.out.println("Error de actualizacion");
         }
     }
-
-//    --NO NECESARIO POR EL MOMENTO--
-//    public void listarClientePorId() {
-//        Cliente cliente = cl.BuscarPorId(1);
-//        if (cliente != null) {
-//            System.out.println("ID CLIENTE: " + cliente.getIdCliente());
-//            System.out.println("RUC: " + cliente.getRUC());
-//            System.out.println("NOMBRE: " + cliente.getNombre());
-//        } else {
-//            System.out.println("No hay registros");
-//        }
-//    }
 
     public void listarClientePorRUC() {
         Cliente cliente = cl.BuscarPorRUC("20542369648"); //COLOCAR RUC
