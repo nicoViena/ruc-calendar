@@ -67,8 +67,6 @@ public class VencimientosDaoImpl implements IVencimientosDao {
         String query = null;
         int ultimoDigito = ruc.charAt(ruc.length() - 1) - '0';
         try {
-//            query = "SELECT enero,febrero,marzo,abril,mayo,junio,julio,agosto,septiembre,octubre,noviembre,diciembre "
-//                    + "FROM vencimiento1 WHERE ult_dig_ruc = ?";
             if (tipo.equalsIgnoreCase("VENCIMIENTO")) {
                 query = "SELECT * FROM vencimientos "
                         + "WHERE ult_dig_ruc = ? AND anio = ?";

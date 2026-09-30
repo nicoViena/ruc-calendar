@@ -18,7 +18,7 @@ public class ClienteDaoImpl implements IClienteDao {
         String query = null;
         try {
             query = "INSERT INTO cliente(ruc,nombre)"
-                    + " VALUES (?,?);";
+                    + " VALUES (?,?)";
             cn = ConnectionDB.conectar();
             st = cn.prepareStatement(query);
             st.setString(1, c.getRUC());
@@ -53,7 +53,7 @@ public class ClienteDaoImpl implements IClienteDao {
         ResultSet rs;
         String query = null;
         try {
-            query = "SELECT * FROM cliente;";
+            query = "SELECT * FROM cliente";
             lista = new ArrayList<>();
             cn = ConnectionDB.conectar();
             st = cn.prepareStatement(query);
@@ -123,7 +123,7 @@ public class ClienteDaoImpl implements IClienteDao {
         boolean flag = false;
         String query = null;
         try {
-            query = "DELETE FROM cliente WHERE id_cliente = ?";
+            query = "DELETE FROM cliente WHERE id_cliente=?";
             cn = ConnectionDB.conectar();
             st = cn.prepareStatement(query);
             st.setInt(1, c.getIdCliente());
@@ -156,7 +156,7 @@ public class ClienteDaoImpl implements IClienteDao {
         ResultSet rs;
         String query = null;
         try {
-            query = "SELECT * FROM cliente WHERE ruc=?;";
+            query = "SELECT * FROM cliente WHERE ruc=?";
             cn = ConnectionDB.conectar();
             st = cn.prepareStatement(query);
             st.setString(1, RUC);
