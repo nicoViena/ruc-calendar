@@ -66,12 +66,13 @@ public class UsuarioDaoImpl implements IUsuarioDao {
         String query = null;
         try {
             String hashPassword = u.HashPassword(u.getContraseña());
-            query = "UPDATE usuario SET usuario=?, clave=? WHERE id_usuario=?";
+            query = "UPDATE usuario SET usuario=?, clave=?, rol=? WHERE id_usuario=?";
             cn = ConnectionDB.conectar();
             st = cn.prepareStatement(query);
             st.setString(1, u.getUsuario());
             st.setString(2, hashPassword);
-            st.setInt(3, u.getIdUsuario());
+            st.setString(3, u.getRol().name());
+            st.setInt(4, u.getIdUsuario());
             st.executeUpdate();
             return true;
         } catch (Exception e) {

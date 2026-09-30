@@ -1,11 +1,11 @@
 package com.sistema_contable;
 
-import com.sistema_contable.vista.Inicio;
+import com.sistema_contable.vista.Login;
 
 public class Main {
 
     public static void main(String[] args) {
-        Inicio i=new Inicio();
+        Login i=new Login();
         i.setVisible(true);
         i.setLocationRelativeTo(null);
     }

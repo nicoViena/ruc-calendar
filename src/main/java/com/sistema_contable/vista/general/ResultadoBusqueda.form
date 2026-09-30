@@ -101,7 +101,7 @@
                   <Table columnCount="4" rowCount="61">
                     <Column editable="true" title="CLIENTE" type="java.lang.Object"/>
                     <Column editable="true" title="RUC" type="java.lang.Object"/>
-                    <Column editable="true" title="VENCIMIENTO" type="java.lang.Object"/>
+                    <Column editable="true" title="IMPUESTOS" type="java.lang.Object"/>
                     <Column editable="true" title="PLE" type="java.lang.Object"/>
                   </Table>
                 </Property>

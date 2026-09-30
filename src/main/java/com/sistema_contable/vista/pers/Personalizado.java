@@ -478,7 +478,12 @@ public class Personalizado extends javax.swing.JPanel {
         venc_box.setBackground(new java.awt.Color(255, 255, 255));
         venc_box.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         venc_box.setForeground(new java.awt.Color(0, 0, 0));
-        venc_box.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ESCOGER VENC", "VENCIMIENTO", "PLE", "AMBOS" }));
+        venc_box.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ESCOGER VENC", "IMPUESTOS", "PLE", "AMBOS" }));
+        venc_box.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                venc_boxActionPerformed(evt);
+            }
+        });
 
         año_select.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -687,7 +692,7 @@ public class Personalizado extends javax.swing.JPanel {
                     lb_oct.setText("Oct-" + año + ":");
                     lb_nov.setText("Nov-" + año + ":");
                     lb_dic.setText("Dic-" + año + ":");
-                    if (tipo.equalsIgnoreCase("VENCIMIENTO")) {
+                    if (tipo.equalsIgnoreCase("IMPUESTOS")) {
                         txt_ene.setText(v.getEnero());
                         txt_feb.setText(v.getFebrero());
                         txt_mar.setText(v.getMarzo());
@@ -716,18 +721,18 @@ public class Personalizado extends javax.swing.JPanel {
                         txt_dic.setText(ple.getDiciembre());
                     } else if (tipo.equalsIgnoreCase("AMBOS")) {
                         PLE ple = v.getPle();
-                        txt_ene.setText("Venc: " + v.getEnero() + " / PLE: " + ple.getEnero());
-                        txt_feb.setText("Venc: " + v.getFebrero() + " / PLE: " + ple.getFebrero());
-                        txt_mar.setText("Venc: " + v.getMarzo() + " / PLE: " + ple.getMarzo());
-                        txt_abr.setText("Venc: " + v.getAbril() + " / PLE: " + ple.getAbril());
-                        txt_may.setText("Venc: " + v.getMayo() + " / PLE: " + ple.getMayo());
-                        txt_jun.setText("Venc: " + v.getJunio() + " / PLE: " + ple.getJunio());
-                        txt_jul.setText("Venc: " + v.getJulio() + " / PLE: " + ple.getJulio());
-                        txt_ago.setText("Venc: " + v.getAgosto() + " / PLE: " + ple.getAgosto());
-                        txt_set.setText("Venc: " + v.getSeptiembre() + " / PLE: " + ple.getSeptiembre());
-                        txt_oct.setText("Venc: " + v.getOctubre() + " / PLE: " + ple.getOctubre());
-                        txt_nov.setText("Venc: " + v.getNoviembre() + " / PLE: " + ple.getNoviembre());
-                        txt_dic.setText("Venc: " + v.getDiciembre() + " / PLE: " + ple.getDiciembre());
+                        txt_ene.setText("Impto: " + v.getEnero() + " / PLE: " + ple.getEnero());
+                        txt_feb.setText("Impto: " + v.getFebrero() + " / PLE: " + ple.getFebrero());
+                        txt_mar.setText("Impto: " + v.getMarzo() + " / PLE: " + ple.getMarzo());
+                        txt_abr.setText("Impto: " + v.getAbril() + " / PLE: " + ple.getAbril());
+                        txt_may.setText("Impto: " + v.getMayo() + " / PLE: " + ple.getMayo());
+                        txt_jun.setText("Impto: " + v.getJunio() + " / PLE: " + ple.getJunio());
+                        txt_jul.setText("Impto: " + v.getJulio() + " / PLE: " + ple.getJulio());
+                        txt_ago.setText("Impto: " + v.getAgosto() + " / PLE: " + ple.getAgosto());
+                        txt_set.setText("Impto: " + v.getSeptiembre() + " / PLE: " + ple.getSeptiembre());
+                        txt_oct.setText("Impto: " + v.getOctubre() + " / PLE: " + ple.getOctubre());
+                        txt_nov.setText("Impto: " + v.getNoviembre() + " / PLE: " + ple.getNoviembre());
+                        txt_dic.setText("Impto: " + v.getDiciembre() + " / PLE: " + ple.getDiciembre());
                     }
                 }
             }
@@ -800,6 +805,10 @@ public class Personalizado extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_btn_printActionPerformed
+
+    private void venc_boxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_venc_boxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_venc_boxActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

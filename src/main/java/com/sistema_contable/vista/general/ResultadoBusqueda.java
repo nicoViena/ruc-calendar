@@ -143,7 +143,7 @@ public class ResultadoBusqueda extends javax.swing.JDialog {
                 {null, null, null, null}
             },
             new String [] {
-                "CLIENTE", "RUC", "VENCIMIENTO", "PLE"
+                "CLIENTE", "RUC", "IMPUESTOS", "PLE"
             }
         ));
         jScrollPane1.setViewportView(tbl_general);
@@ -350,7 +350,7 @@ public class ResultadoBusqueda extends javax.swing.JDialog {
                     if (value != null) {
                         cell.setCellValue(value.toString());
                     }
-                    if (model.getColumnName(col).equalsIgnoreCase("Vencimiento")) {
+                    if (model.getColumnName(col).equalsIgnoreCase("Impuestos")) {
                         cell.setCellStyle(centerStyle);
                     } else {
                         cell.setCellStyle(borderStyle);

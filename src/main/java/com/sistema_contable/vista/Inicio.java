@@ -1,17 +1,27 @@
 package com.sistema_contable.vista;
 
+import com.sistema_contable.model.Usuario;
 import java.awt.BorderLayout;
 import javax.swing.GroupLayout;
 import javax.swing.JOptionPane;
 import com.sistema_contable.vista.cliente.ListaCliente;
 import com.sistema_contable.vista.general.General;
 import com.sistema_contable.vista.pers.Personalizado;
+import com.sistema_contable.model.Rol;
 
 public class Inicio extends javax.swing.JFrame {
-    
+
+    private Usuario usuarioActual;
+
     public Inicio() {
         initComponents();
+    }
+
+    public Inicio(Usuario usuario) {
+        initComponents();
         setLocationRelativeTo(null);
+        this.usuarioActual = usuario;
+        aplicarPermisos();
     }
 
     /**
@@ -34,6 +44,7 @@ public class Inicio extends javax.swing.JFrame {
         btn_busq_pers = new javax.swing.JButton();
         btn_busq_gnrl = new javax.swing.JButton();
         btn_cliente_admin = new javax.swing.JButton();
+        btn_logout = new javax.swing.JButton();
         panel_superior = new javax.swing.JPanel();
         lb_titulo_superior = new javax.swing.JLabel();
         panel_central = new javax.swing.JPanel();
@@ -106,6 +117,18 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
 
+        btn_logout.setBackground(new java.awt.Color(57, 54, 62));
+        btn_logout.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn_logout.setForeground(new java.awt.Color(255, 255, 255));
+        btn_logout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logout.png"))); // NOI18N
+        btn_logout.setText("Cerrar Sesion");
+        btn_logout.setBorderPainted(false);
+        btn_logout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_logoutActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panel_izquierdoLayout = new javax.swing.GroupLayout(panel_izquierdo);
         panel_izquierdo.setLayout(panel_izquierdoLayout);
         panel_izquierdoLayout.setHorizontalGroup(
@@ -129,6 +152,10 @@ public class Inicio extends javax.swing.JFrame {
                                 .addComponent(lb_titulo_principal, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 9, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(panel_izquierdoLayout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(btn_logout)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panel_izquierdoLayout.setVerticalGroup(
             panel_izquierdoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,7 +172,9 @@ public class Inicio extends javax.swing.JFrame {
                 .addComponent(btn_busq_gnrl)
                 .addGap(30, 30, 30)
                 .addComponent(btn_cliente_admin)
-                .addContainerGap(189, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 128, Short.MAX_VALUE)
+                .addComponent(btn_logout)
+                .addGap(34, 34, 34))
         );
 
         panelPrincipal.add(panel_izquierdo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 210, 520));
@@ -253,6 +282,26 @@ public class Inicio extends javax.swing.JFrame {
         panel_central.repaint();
     }//GEN-LAST:event_btn_cliente_adminActionPerformed
 
+    private void btn_logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_logoutActionPerformed
+        int resp = JOptionPane.showConfirmDialog(this,"¿Está seguro de cerrar sesión?",
+                "Cerrar sesión",JOptionPane.YES_NO_OPTION);
+        if (resp == JOptionPane.YES_OPTION) {
+            Login login = new Login();
+            login.setLocationRelativeTo(null);
+            login.setVisible(true);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this,"Operación cancelada","Información",
+                    JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_btn_logoutActionPerformed
+
+    private void aplicarPermisos() {
+        if (usuarioActual.getRol() == Rol.USUARIO) {
+            btn_cliente_admin.setVisible(false);
+        }
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -296,6 +345,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JButton btn_busq_pers;
     private javax.swing.JButton btn_cliente_admin;
     private javax.swing.JButton btn_home;
+    private javax.swing.JButton btn_logout;
     private javax.swing.JLabel lb_bienvenida;
     private javax.swing.JLabel lb_titulo_principal;
     private javax.swing.JLabel lb_titulo_superior;

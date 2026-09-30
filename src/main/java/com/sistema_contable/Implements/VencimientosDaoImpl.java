@@ -67,7 +67,7 @@ public class VencimientosDaoImpl implements IVencimientosDao {
         String query = null;
         int ultimoDigito = ruc.charAt(ruc.length() - 1) - '0';
         try {
-            if (tipo.equalsIgnoreCase("VENCIMIENTO")) {
+            if (tipo.equalsIgnoreCase("IMPUESTOS")) {
                 query = "SELECT * FROM vencimientos "
                         + "WHERE ult_dig_ruc = ? AND anio = ?";
             } else if (tipo.equalsIgnoreCase("PLE")) {
@@ -105,7 +105,7 @@ public class VencimientosDaoImpl implements IVencimientosDao {
                 v.setUltimo_digito(rs.getInt("ult_dig_ruc"));
                 v.setAño(rs.getInt("anio"));
                 // SOLO VENCIMIENTO O AMBOS
-                if (tipo.equalsIgnoreCase("VENCIMIENTO")|| tipo.equalsIgnoreCase("AMBOS")) {
+                if (tipo.equalsIgnoreCase("IMPUESTOS")|| tipo.equalsIgnoreCase("AMBOS")) {
                     v.setEnero(rs.getString("enero"));
                     v.setFebrero(rs.getString("febrero"));
                     v.setMarzo(rs.getString("marzo"));
