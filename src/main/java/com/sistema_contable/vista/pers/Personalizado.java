@@ -568,6 +568,7 @@ public class Personalizado extends javax.swing.JPanel {
         btn_buscar.setForeground(new java.awt.Color(0, 0, 0));
         btn_buscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search.png"))); // NOI18N
         btn_buscar.setText("Buscar");
+        btn_buscar.setBorderPainted(false);
         btn_buscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_buscarActionPerformed(evt);
@@ -591,6 +592,7 @@ public class Personalizado extends javax.swing.JPanel {
         btn_print.setForeground(new java.awt.Color(0, 0, 0));
         btn_print.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/impresora .png"))); // NOI18N
         btn_print.setText("Imprimir");
+        btn_print.setBorderPainted(false);
         btn_print.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_printActionPerformed(evt);

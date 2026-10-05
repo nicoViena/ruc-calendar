@@ -79,6 +79,7 @@ public class AgregarCliente extends javax.swing.JFrame {
         btn_registrar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_registrar.setForeground(new java.awt.Color(255, 255, 255));
         btn_registrar.setText("Registrar");
+        btn_registrar.setBorderPainted(false);
         btn_registrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_registrarActionPerformed(evt);
@@ -89,6 +90,7 @@ public class AgregarCliente extends javax.swing.JFrame {
         btn_cancelar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_cancelar.setForeground(new java.awt.Color(255, 255, 255));
         btn_cancelar.setText("Cancelar");
+        btn_cancelar.setBorderPainted(false);
         btn_cancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_cancelarActionPerformed(evt);

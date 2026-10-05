@@ -75,6 +75,7 @@ public class ListaCliente extends javax.swing.JPanel {
         btn_agregar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_agregar.setForeground(new java.awt.Color(204, 255, 255));
         btn_agregar.setText("Agregar");
+        btn_agregar.setBorderPainted(false);
         btn_agregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_agregarActionPerformed(evt);
@@ -85,6 +86,7 @@ public class ListaCliente extends javax.swing.JPanel {
         btn_eliminar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_eliminar.setForeground(new java.awt.Color(0, 0, 0));
         btn_eliminar.setText("Eliminar");
+        btn_eliminar.setBorderPainted(false);
         btn_eliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_eliminarActionPerformed(evt);
@@ -95,6 +97,7 @@ public class ListaCliente extends javax.swing.JPanel {
         btn_agregar1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_agregar1.setForeground(new java.awt.Color(0, 0, 0));
         btn_agregar1.setText("Recargar");
+        btn_agregar1.setBorderPainted(false);
         btn_agregar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_agregar1ActionPerformed(evt);
